@@ -1,0 +1,15 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  test:
+    name: MCP server test matrix
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile the server
+        run: python3 -m py_compile server.py
+      - name: Run the JSON-RPC test matrix
+        run: bash test/run-tests.sh
